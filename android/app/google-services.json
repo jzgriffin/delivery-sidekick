@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "743745325506",
+    "firebase_url": "https://delivery-sidekick.firebaseio.com",
+    "project_id": "delivery-sidekick",
+    "storage_bucket": "delivery-sidekick.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743745325506:android:d25b1f81fc263825",
+        "android_client_info": {
+          "package_name": "com.nokurn.deliverysidekick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743745325506-va7rkd2s8627rqdl8fgkfresiqnc1qpo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nokurn.deliverysidekick",
+            "certificate_hash": "ae698f4a878cb2b3d0eaf1f7e99cf769516bef42"
+          }
+        },
+        {
+          "client_id": "743745325506-bpvuah8b41ttm48irdmsa6odqtvi36et.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6HfiTydpwtw1li0uRghkfatB8VOmmOtw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743745325506-bpvuah8b41ttm48irdmsa6odqtvi36et.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Authentication
+  google_sign_in: ^3.2.4
+  firebase_auth: ^0.6.2+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
