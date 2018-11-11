@@ -24,7 +24,6 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) => Scaffold(
         body: Container(), // TODO
         appBar: AppBar(
-          centerTitle: true,
           title: Text('Dashboard'),
         ),
         drawer: UserDrawer(user: widget.user),

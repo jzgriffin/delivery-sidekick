@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'jobs.dart';
 import 'signin.dart';
 
 /// Widget for displaying the side drawer when signed in
@@ -71,6 +72,11 @@ class _UserDrawerState extends State<UserDrawer> {
             leading: Icon(Icons.home),
             onTap: _goToDashboard,
           ),
+          ListTile(
+            title: Text('Jobs'),
+            leading: Icon(Icons.work),
+            onTap: _goToJobs,
+          ),
           Divider(),
           ListTile(
             title: Text('Settings'),
@@ -96,6 +102,11 @@ class _UserDrawerState extends State<UserDrawer> {
     Navigator.pop(context); // Close the drawer
     // The dashboard must stay at the bottom of the stack
     Navigator.popUntil(context, (route) => route.isFirst);
+  }
+
+  // Navigates to the job list
+  void _goToJobs() {
+    _goTo(MaterialPageRoute(builder: (_) => JobsPage(user: widget.user)));
   }
 
   /// Signs out of the user account

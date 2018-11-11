@@ -83,7 +83,6 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
           ),
         ),
         appBar: AppBar(
-          centerTitle: true,
           title: Text('${_formTypeTitle(_formType)} with email'),
         ),
       );
