@@ -1,12 +1,10 @@
+import 'package:delivery_sidekick/page/dashboard_page.dart';
+import 'package:delivery_sidekick/page/signin_page.dart';
+import 'package:delivery_sidekick/session.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'dashboard.dart';
-import 'signin.dart';
-
 /// Widget for displaying the details of an individual currency
-/// This class is stateful because it must navigate to the next page after the
-/// authentication information is retrieved
 class SplashPage extends StatefulWidget {
   /// Creates the mutable state for this widget
   @override
@@ -30,8 +28,9 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => SignInPage()));
       } else {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (_) => DashboardPage(user: user)));
+        Session.signIn(user: user);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => DashboardPage()));
       }
     });
   }

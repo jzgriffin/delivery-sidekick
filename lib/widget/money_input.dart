@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money/money.dart';
 
-import 'currencies.dart';
+import 'package:delivery_sidekick/model/money.dart';
 
 typedef void MoneyChangedCallback(Money value);
 

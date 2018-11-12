@@ -20,7 +20,14 @@ dependencies:
 
   # Tracking
   money: ^0.2.1
-  geolocator: ^2.1.0
+  location: ^1.4.1
+  url_launcher: ^4.0.1
+  geocoder: ^0.1.1
+  google_maps_flutter:
+     git:
+       url: git://github.com/flutter/plugins
+       path: packages/google_maps_flutter
+       ref: 'ce3a913c3834'
 
 dev_dependencies:
   flutter_test:

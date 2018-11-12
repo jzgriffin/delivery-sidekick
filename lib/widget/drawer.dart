@@ -1,17 +1,11 @@
+import 'package:delivery_sidekick/page/jobs_page.dart';
+import 'package:delivery_sidekick/page/signin_page.dart';
+import 'package:delivery_sidekick/session.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'jobs.dart';
-import 'signin.dart';
-
 /// Widget for displaying the side drawer when signed in
 class UserDrawer extends StatefulWidget {
-  /// The current sign-in user
-  final FirebaseUser user;
-
-  /// Constructs this widget instance
-  UserDrawer({@required this.user});
-
   /// Creates the mutable state for this widget
   @override
   createState() => _UserDrawerState();
@@ -21,6 +15,9 @@ class UserDrawer extends StatefulWidget {
 class _UserDrawerState extends State<UserDrawer> {
   /// Instance of the Firebase authentication library
   final _auth = FirebaseAuth.instance;
+
+  /// Instance of the application session
+  final _session = Session();
 
   /// Describes the part of the user interface represented by this widget
   @override
@@ -43,23 +40,24 @@ class _UserDrawerState extends State<UserDrawer> {
       );
 
   /// Builds a widget for displaying the user name
-  Widget _buildAccountName() => widget.user.displayName == null
+  Widget _buildAccountName() => _session.authUser.displayName == null
       ? Container()
-      : Text(widget.user.displayName);
+      : Text(_session.authUser.displayName);
 
   /// Builds a widget for displaying the user email address
-  Widget _buildAccountEmail() =>
-      widget.user.email == null ? Container() : Text(widget.user.email);
+  Widget _buildAccountEmail() => _session.authUser.email == null
+      ? Container()
+      : Text(_session.authUser.email);
 
   /// Builds a widget for displaying the user portrait
-  Widget _buildAccountPicture() => widget.user.photoUrl == null
+  Widget _buildAccountPicture() => _session.authUser.photoUrl == null
       ? Container()
       : Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage(widget.user.photoUrl),
+              image: NetworkImage(_session.authUser.photoUrl),
             ),
           ),
         );
@@ -75,7 +73,7 @@ class _UserDrawerState extends State<UserDrawer> {
           ListTile(
             title: Text('Jobs'),
             leading: Icon(Icons.work),
-            onTap: _goToJobs,
+            onTap: () => _goTo(MaterialPageRoute(builder: (_) => JobsPage())),
           ),
           Divider(),
           ListTile(
@@ -91,6 +89,7 @@ class _UserDrawerState extends State<UserDrawer> {
         ],
       );
 
+  /// Navigates to a particular page from the drawer
   void _goTo(MaterialPageRoute target) {
     Navigator.pop(context); // Close the drawer
     // Push the target route and remove everything between it and the dashboard
@@ -102,11 +101,6 @@ class _UserDrawerState extends State<UserDrawer> {
     Navigator.pop(context); // Close the drawer
     // The dashboard must stay at the bottom of the stack
     Navigator.popUntil(context, (route) => route.isFirst);
-  }
-
-  // Navigates to the job list
-  void _goToJobs() {
-    _goTo(MaterialPageRoute(builder: (_) => JobsPage(user: widget.user)));
   }
 
   /// Signs out of the user account

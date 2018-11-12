@@ -1,6 +1,5 @@
+import 'package:delivery_sidekick/page/splash_page.dart';
 import 'package:flutter/material.dart';
-
-import 'splash.dart';
 
 /// Entry point for the application
 void main() => runApp(MyApp());

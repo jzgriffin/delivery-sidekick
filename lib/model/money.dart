@@ -1,3 +1,15 @@
+import 'package:money/money.dart';
+
+Map moneyToMap(Money money) => money == null
+    ? null
+    : {
+        'amount': money.amount,
+        'symbol': money.currency.code,
+      };
+
+Money moneyFromMap(Map map) => Money(map['amount'], Currency(map['symbol']));
+
+/// List of supported currency symbols in ISO 4217
 const currencySymbols = <String>[
   'AED',
   'AFN',

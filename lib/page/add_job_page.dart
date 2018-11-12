@@ -1,18 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:delivery_sidekick/model/job.dart';
+import 'package:delivery_sidekick/model/mileage.dart';
+import 'package:delivery_sidekick/model/mileage_unit.dart';
+import 'package:delivery_sidekick/session.dart';
+import 'package:delivery_sidekick/widget/money_input.dart';
 import 'package:flutter/material.dart';
-
-import 'model.dart';
-import 'money_input.dart';
 
 /// Widget for entering a new job
 class AddJobPage extends StatefulWidget {
-  /// The current signed-in user
-  final FirebaseUser user;
-
-  /// Constructs this widget instance
-  AddJobPage({@required this.user});
-
   /// Creates the mutable state for this widget
   @override
   createState() => _AddJobPageState();
@@ -20,21 +15,16 @@ class AddJobPage extends StatefulWidget {
 
 /// State for the add job page
 class _AddJobPageState extends State<AddJobPage> {
-  /// Items for the mileage unit drop-down
-  static final _mileageUnitItems = <String, MileageUnit>{
-    'run': MileageUnit.run,
-    'delivery': MileageUnit.delivery,
-    'mile': MileageUnit.mile,
-    'kilometer': MileageUnit.kilometer,
-  };
-
   /// Instance of the Firestore database
   final _firestore = Firestore.instance;
+
+  /// Instance of the application session
+  final _session = Session();
 
   /// Key for the entire job form
   final _formKey = GlobalKey<FormState>();
 
-  // Job assembled from the form
+  /// Job assembled from the form
   var _job = Job();
 
   /// Describes the part of the user interface represented by this widget
@@ -157,7 +147,7 @@ class _AddJobPageState extends State<AddJobPage> {
                 hint: Text('Unit'),
                 value: _job.mileage.unit,
                 onChanged: (value) => setState(() => _job.mileage.unit = value),
-                items: _mileageUnitItems.entries
+                items: mileageUnits.entries
                     .map((entry) => DropdownMenuItem<MileageUnit>(
                           value: entry.value,
                           child: Text(entry.key),
@@ -209,7 +199,7 @@ class _AddJobPageState extends State<AddJobPage> {
     if (!_validate()) return;
 
     await _firestore
-        .collection('users/${widget.user.uid}/jobs')
+        .collection('users/${_session.authUser.uid}/jobs')
         .add(_job.toMap());
     Navigator.pop(context);
   }
